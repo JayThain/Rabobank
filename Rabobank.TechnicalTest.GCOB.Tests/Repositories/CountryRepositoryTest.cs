@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Rabobank.TechnicalTest.GCOB.Models.Data;
 using Rabobank.TechnicalTest.GCOB.Models.Entities;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract;
@@ -18,7 +19,8 @@ public class CountryRepositoryTest
   public void Initialize()
   {
     var logger = new Mock<ILogger<InMemoryRepository<Country>>>().Object;
-    _countryRepository = new InMemoryCountryRepository(logger);
+    var countryDataStore = EntityDataStore<Country>.Instance;
+    _countryRepository = new InMemoryCountryRepository(logger, countryDataStore);
   }
 
   [TestMethod]
@@ -45,6 +47,8 @@ public class CountryRepositoryTest
   [TestMethod]
   public async Task GivenIHavePopulatedCountryData_ThenGetAll_Returns5Items()
   {
+    new CountryDataStoreInitializer();
+
     var countries = await _countryRepository.GetAllAsync();
 
     Assert.AreEqual(5, countries.Count());

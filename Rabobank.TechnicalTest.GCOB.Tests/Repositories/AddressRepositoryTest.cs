@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Rabobank.TechnicalTest.GCOB.Models.Data;
 using Rabobank.TechnicalTest.GCOB.Models.Entities;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract;
@@ -17,7 +18,9 @@ public class AddressRepositoryTest
   public void Initialize()
   {
     var logger = new Mock<ILogger<InMemoryRepository<Address>>>().Object;
-    _addressRepository = new InMemoryAddressRepository(logger);
+    var addressDataStore = EntityDataStore<Address>.Instance;
+
+    _addressRepository = new InMemoryAddressRepository(logger, addressDataStore);
   }
 
   [TestMethod]

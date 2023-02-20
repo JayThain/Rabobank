@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Rabobank.TechnicalTest.GCOB.Models.Data;
 using Rabobank.TechnicalTest.GCOB.Models.Entities.Abstract;
 using Rabobank.TechnicalTest.GCOB.Models.Exceptions;
 
@@ -12,13 +13,14 @@ public abstract class InMemoryRepository<T> where T : Entity
 {
   protected readonly ILogger<InMemoryRepository<T>> Logger;
 
-  protected ConcurrentDictionary<int, T> Data { get; init; }
+  protected ConcurrentDictionary<int, T> Data { get; }
 
   private readonly object _identityLock = new();
 
-  protected InMemoryRepository(ILogger<InMemoryRepository<T>> logger)
+  protected InMemoryRepository(ILogger<InMemoryRepository<T>> logger, IEntityDataStore<T> customerDataStore)
   {
     Logger = logger;
+    Data = customerDataStore.Data;
   }
 
   protected abstract string EntityName { get; }
