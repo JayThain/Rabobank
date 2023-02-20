@@ -6,5 +6,5 @@ public sealed class AddressDto
   public string Street { get; set; }
   public string City { get; set; }
   public string Postcode { get; set; }
-  public int CountryId { get; set; }
+  public CountryDto Country { get; set; }
 }

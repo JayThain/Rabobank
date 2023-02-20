@@ -7,9 +7,9 @@ public static class Dependencies
 {
   internal static void ConfigureServices(IServiceCollection services)
   {
-    services.AddScoped<ICustomerRepository, InMemoryCustomerRepository>();
-    services.AddScoped<IAddressRepository, InMemoryAddressRepository>();
-    services.AddScoped<ICountryRepository, InMemoryCountryRepository>();
+    services.AddSingleton<ICustomerRepository, InMemoryCustomerRepository>();
+    services.AddSingleton<IAddressRepository, InMemoryAddressRepository>();
+    services.AddSingleton<ICountryRepository, InMemoryCountryRepository>();
   }
 }
 

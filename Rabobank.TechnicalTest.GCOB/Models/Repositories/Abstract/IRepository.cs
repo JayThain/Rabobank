@@ -5,6 +5,7 @@ namespace Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract
 {
   public interface IRepository<T> where T : Entity
   {
+    Task<int> GenerateIdentityAsync();
     Task<T> GetAsync(int identity);
     Task InsertAsync(T entity);
     Task UpdateAsync(T entity);

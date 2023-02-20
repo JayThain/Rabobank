@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
-using Rabobank.TechnicalTest.GCOB.Models.Dtos;
 using Rabobank.TechnicalTest.GCOB.Models.Entities;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract;
 
