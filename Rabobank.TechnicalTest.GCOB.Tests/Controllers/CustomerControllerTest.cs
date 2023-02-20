@@ -1,7 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Rabobank.TechnicalTest.GCOB.Tests.Services
+namespace Rabobank.TechnicalTest.GCOB.Tests.Controllers
 {
     [TestClass]
     public class CustomerControllerTest

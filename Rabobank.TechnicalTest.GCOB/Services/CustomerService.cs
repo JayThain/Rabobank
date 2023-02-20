@@ -1,6 +1,5 @@
-﻿namespace Rabobank.TechnicalTest.GCOB.Services
+﻿namespace Rabobank.TechnicalTest.GCOB.Services;
+
+public class CustomerService
 {
-    public class CustomerService
-    {
-    }
 }
