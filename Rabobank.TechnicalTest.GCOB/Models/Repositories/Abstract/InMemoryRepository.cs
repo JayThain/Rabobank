@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -51,6 +52,14 @@ public abstract class InMemoryRepository<T> where T : Entity
     if (!Data.ContainsKey(identity)) throw new NoEntityFoundException($"No {EntityName} exists with identity {identity.ToString()}");
     Logger.LogDebug($"Found {EntityName} with identity {identity}");
     return Task.FromResult(Data[identity]);
+  }
+
+
+  public Task<IEnumerable<T>> GetAllAsync()
+  {
+    Logger.LogDebug($"Get all {EntityName}");
+
+    return Task.FromResult(Data.Select(x => x.Value));
   }
 
   public Task InsertAsync(T entity)

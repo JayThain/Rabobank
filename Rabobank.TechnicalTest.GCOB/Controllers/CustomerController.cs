@@ -30,7 +30,7 @@ public class CustomerController : ControllerBase
     {
       _logger.LogInformation("HTTP GET call made on Customers.");
 
-      var customers = await _customerService.GetCustomers();
+      var customers = await _customerService.GetCustomersAsync();
 
       return customers.Any() ? Ok(customers) : NoContent();
     }
@@ -49,7 +49,7 @@ public class CustomerController : ControllerBase
     {
       _logger.LogInformation($"HTTP POST call made to update a customer with data: {customerDto.ToJson()}");
 
-      await _customerService.UpdateCustomer(customerDto);
+      await _customerService.UpdateCustomerAsync(customerDto);
 
       return NoContent();
     }

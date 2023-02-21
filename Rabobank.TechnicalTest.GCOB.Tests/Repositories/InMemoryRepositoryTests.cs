@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Linq;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Rabobank.TechnicalTest.GCOB.Models.Data;
 using Rabobank.TechnicalTest.GCOB.Models.Entities.Abstract;
 using Rabobank.TechnicalTest.GCOB.Models.Exceptions;
 using Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract;
+using System.Threading.Tasks;
 
 namespace Rabobank.TechnicalTest.GCOB.Tests.Repositories;
 
@@ -65,6 +67,36 @@ public class InMemoryRepositoryTests
     Assert.AreEqual("c", entity.Result.SomeField);
   }
 
+
+  // Testing GetAllAsync
+  [TestMethod]
+  public async Task GivenIHaveNoEntityData_ThenGetAll_Returns0Items()
+  {
+    var repository = new InMemoryRepositoryStub(_logger, DataStoreWith0Items());
+
+    var entities = await repository.GetAllAsync();
+
+    Assert.IsNotNull(entities);
+    Assert.IsTrue(!entities.Any());
+  }
+
+  [TestMethod]
+  public async Task GivenIHaveEntityData_ThenGetAll_Returns5Items()
+  {
+    var repository = new InMemoryRepositoryStub(_logger, DataStoreWith5Items());
+
+    var entities = await repository.GetAllAsync();
+
+    var entityArray = entities.ToArray();
+
+    Assert.AreEqual(5, entityArray.Count());
+    Assert.AreEqual("a", entityArray.Single(x => x.Id == 1).SomeField);
+    Assert.AreEqual("b", entityArray.Single(x => x.Id == 2).SomeField);
+    Assert.AreEqual("c", entityArray.Single(x => x.Id == 3).SomeField);
+    Assert.AreEqual("d", entityArray.Single(x => x.Id == 4).SomeField);
+    Assert.AreEqual("e", entityArray.Single(x => x.Id == 5).SomeField);
+  }
+
   // Testing InsertAsync
   [TestMethod]
   public void GivenIHave0ItemOfData_ThenIShouldBeAbleToInsertAnItem()
@@ -90,7 +122,7 @@ public class InMemoryRepositoryTests
   public void GivenIHave1ItemOfData_ThenIShouldBeAbleToUpdateThatItem()
   {
     var repository = new InMemoryRepositoryStub(_logger, DataStoreWith1Item());
-    
+
     var entity = repository.GetAsync(1).Result;
 
     entity.SomeField = "new value";
@@ -152,7 +184,7 @@ public class InMemoryRepositoryTests
     protected override string EntityName => "EntityStub";
   }
 
-    public class EntityStub : Entity
+  public class EntityStub : Entity
   {
     public string SomeField { get; set; }
   }

@@ -78,12 +78,10 @@ public class CustomerControllerTest
     Assert.IsNotNull(errorResult);
     Assert.AreEqual(400, errorResult.StatusCode);
   }
-
-
   private static Mock<ICustomerService> MockCustomerServiceGetCustomers(IEnumerable<CustomerDto> customers)
   {
     var mock = new Mock<ICustomerService>();
-    mock.Setup(x => x.GetCustomers()).Returns(
+    mock.Setup(x => x.GetCustomersAsync()).Returns(
       () => Task.FromResult(customers));
     return mock;
   }
@@ -91,7 +89,7 @@ public class CustomerControllerTest
   private static Mock<ICustomerService> MockCustomerServiceUpdateCustomer(Func<Task> updateFunc)
   {
     var mock = new Mock<ICustomerService>();
-    mock.Setup(x => x.UpdateCustomer(It.IsAny<CustomerDto>())).Returns(Task.Run(updateFunc));
+    mock.Setup(x => x.UpdateCustomerAsync(It.IsAny<CustomerDto>())).Returns(Task.Run(updateFunc));
     return mock;
   }
 

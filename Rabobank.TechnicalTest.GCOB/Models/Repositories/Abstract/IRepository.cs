@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Rabobank.TechnicalTest.GCOB.Models.Entities.Abstract;
 
 namespace Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract
@@ -7,6 +8,7 @@ namespace Rabobank.TechnicalTest.GCOB.Models.Repositories.Abstract
   {
     Task<int> GenerateIdentityAsync();
     Task<T> GetAsync(int identity);
+    Task<IEnumerable<T>> GetAllAsync();
     Task InsertAsync(T entity);
     Task UpdateAsync(T entity);
   }

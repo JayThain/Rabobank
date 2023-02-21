@@ -14,5 +14,4 @@ public class CountryDataStoreInitializer
     dataStore.Data.TryAdd(4, new Country { Id = 1, Name = "Netherlands" });
     dataStore.Data.TryAdd(5, new Country { Id = 5, Name = "India" });
   }
-
 }
