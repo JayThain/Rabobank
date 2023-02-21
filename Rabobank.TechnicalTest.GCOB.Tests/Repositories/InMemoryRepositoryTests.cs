@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Rabobank.TechnicalTest.GCOB.Models.Data;

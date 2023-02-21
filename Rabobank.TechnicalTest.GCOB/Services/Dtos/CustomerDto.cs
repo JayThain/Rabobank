@@ -1,4 +1,4 @@
-﻿namespace Rabobank.TechnicalTest.GCOB.Models.Dtos;
+﻿namespace Rabobank.TechnicalTest.GCOB.Services.Dtos;
 
 public class CustomerDto
 {
